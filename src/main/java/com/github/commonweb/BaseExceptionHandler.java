@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * If you want use this handler, make a class extends it and mark with org.springframework.web.bind.annotation.ControllerAdvice
  */
-public class ControllerExceptionHandler {
+public class BaseExceptionHandler {
 
-    private final static Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
+    private final static Logger logger = LoggerFactory.getLogger(BaseExceptionHandler.class);
 
     // your can override these
     public  int DEFAULT_EXCEPTION_CODE = 100;
