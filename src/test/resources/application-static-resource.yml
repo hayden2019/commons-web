@@ -1,0 +1,11 @@
+spring:
+   resources:
+     # in default the path is from class path ,
+     # if you want from file system ,please spec begin with file://
+     static-locations: file:///tmp
+   mvc:
+     # remapping url , if you have a file named a.csv, that it's at /resources/a.csv
+     static-path-pattern: /resources/**
+
+server:
+  port: 18081

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * If you want use this handler, make a class extends it and mark with org.springframework.web.bind.annotation.ControllerAdvice
+ * If you want use this handler,
+ * make a class extends it and mark with org.springframework.web.bind.annotation.ControllerAdvice
+ * @ControllerAdvice
  */
 public class BaseExceptionHandler {
 
