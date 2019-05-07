@@ -33,24 +33,21 @@ public class BaseExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = org.springframework.validation.BindException.class)
     public RestResponse bindExceptionHandler(org.springframework.validation.BindException ex) {
-        logger.error("Global [Exception] handler: " + ex.getMessage(), ex);
         StringBuffer sbErrorMessage = new StringBuffer();
-        sbErrorMessage.append("Input param error:");
         for(FieldError fieldError:ex.getFieldErrors()){
-            sbErrorMessage.append("“"+fieldError.getField()+"”");
-            sbErrorMessage.append(":");
-            sbErrorMessage.append(fieldError.getDefaultMessage());
-            sbErrorMessage.append(";");
+            sbErrorMessage.append(formatFieldError(fieldError));
+            sbErrorMessage.append("\n");
         }
         return createExceptionResponse(BIND_EXCEPTION_CODE,sbErrorMessage.toString(),ex);
     }
-
+    private String formatFieldError(FieldError e){
+        return String.format(" Input field: [%s] error, reason: [%s]", e.getField(), e.getDefaultMessage());
+    }
     @ResponseBody
     @ExceptionHandler(value = org.springframework.web.bind.MethodArgumentNotValidException.class)
     public RestResponse methodArgumentNotValidExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException ex) {
         FieldError fieldError = ex.getBindingResult().getFieldError();
-        String message=String.format("method input error: “%s”：%s",fieldError.getField(),fieldError.getDefaultMessage());
-        return createExceptionResponse(METHOD_EXCEPTION_CODE, message,ex);
+        return createExceptionResponse(METHOD_EXCEPTION_CODE, formatFieldError(fieldError),ex);
     }
 
     @ResponseBody
