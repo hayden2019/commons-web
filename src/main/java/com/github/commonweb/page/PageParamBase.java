@@ -1,19 +1,18 @@
 package com.github.commonweb.page;
 
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class PageParamBase extends PageBase{
 
     @NotBlank
-    String orderKey;
+    String orderBy;
     @NotBlank
     String order;
-    public String getOrderKey() {
-        return orderKey;
+    public String getOrderBy() {
+        return orderBy;
     }
-    public void setOrderKey(String orderKey) {
-        this.orderKey = orderKey;
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
     }
     public String getOrder() {
         return order;
@@ -24,8 +23,8 @@ public class PageParamBase extends PageBase{
     }
 
     public String getPhrase(){
-        if(notEmpty(orderKey) && notEmpty(order)){
-            return orderKey + " " + order;
+        if(notEmpty(orderBy) && notEmpty(order)){
+            return orderBy + " " + order;
         }else{
             return null;
         }
