@@ -7,11 +7,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ServiceException extends RuntimeException{
     protected  Integer code;
     protected String message;
+    protected String detail;
 
 
     public ServiceException(Integer code, String message) {
         this.code = code;
         this.message = message;
+    }
+
+    public ServiceException(Integer code, String message, String detail) {
+        this.code = code;
+        this.message = message;
+        this.detail = detail;
     }
 
     public ServiceException(Integer code, String message, Throwable cause) {
@@ -39,4 +46,11 @@ public class ServiceException extends RuntimeException{
         return exception;
     }
 
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 }
