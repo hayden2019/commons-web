@@ -3,11 +3,11 @@ package com.github.commonweb.page;
 public class PageBase {
 
     private static final Integer DEFAULT_PAGESIZE = 15;
-    private static final Integer DEFAULT_PAGENUMBER = 1;
+    private static final Integer DEFAULT_PAGE_NUMBER = 1;
 
 
     Integer pageSize = DEFAULT_PAGESIZE;
-    Integer pageNumber = DEFAULT_PAGENUMBER;
+    Integer pageNumber = DEFAULT_PAGE_NUMBER;
 
     public Integer getPageSize() {
         return pageSize;
