@@ -26,7 +26,7 @@ public class BaseExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public RestResponse exceptionHandler(Exception ex) {
-            return  createExceptionResponse(DEFAULT_EXCEPTION_CODE,"Error msg: "+ex.getMessage() + "\nCause by:\n"
+            return  createExceptionResponse(DEFAULT_EXCEPTION_CODE,ex.getMessage() + "\nCause by:\n"
                     +ex.getCause(), ex);
     }
 

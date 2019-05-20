@@ -17,7 +17,7 @@ public class RestResponse {
     }
 
     public static RestResponse successWithMessage(String message) {
-        return makeWithMsg(SUCCESS_CODE, message);
+        return makeWithMsg(SUCCESS_CODE, message, null);
     }
 
     public static RestResponse success(Object object) {
@@ -37,14 +37,19 @@ public class RestResponse {
         // }
     }
 
-    public static RestResponse fail(int code, String message) {
-        return makeWithMsg(code, message);
+    public static RestResponse fail(int code, String message, String detail) {
+        return makeWithMsg(code, message, detail);
     }
 
-    private static RestResponse makeWithMsg(int code, String message) {
+    public static RestResponse fail(int code, String message) {
+        return makeWithMsg(code, message, null);
+    }
+
+    private static RestResponse makeWithMsg(int code, String message, String detail) {
 
         HashMap<String, Object> data = new HashMap<String, Object>();
         data.put("message", message);
+        data.put("detail", detail);
         return new RestResponse(code, data);
     }
 

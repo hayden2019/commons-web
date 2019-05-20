@@ -24,7 +24,7 @@ public class PageParamBase extends PageBase{
 
     public String getPhrase(){
         if(notEmpty(orderBy) && notEmpty(order)){
-            return orderBy + " " + order;
+            return  " " + orderBy + " " + order;
         }else{
             return null;
         }
