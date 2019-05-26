@@ -19,14 +19,14 @@ public class BaseExceptionHandler {
     private final static Logger logger = LoggerFactory.getLogger(BaseExceptionHandler.class);
 
     // your can override these
-    public  int DEFAULT_EXCEPTION_CODE = 100;
-    public  int BIND_EXCEPTION_CODE = 101;
-    public  int METHOD_EXCEPTION_CODE = 102;
+    public  int CODE_DEFAULT_EXCEPTION = 100;
+    public  int CODE_BIND_EXCEPTION = 101;
+    public  int CODE_METHOD_EXCEPTION = 102;
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public RestResponse exceptionHandler(Exception ex) {
-            return  createExceptionResponse(DEFAULT_EXCEPTION_CODE,ex.getMessage() + "\nCause by:\n"
+            return  createExceptionResponse(CODE_DEFAULT_EXCEPTION,"DEFAULT_EXCEPTION", ex.getMessage() + "\nCause by:\n"
                     +ex.getCause(), ex);
     }
 
@@ -38,7 +38,7 @@ public class BaseExceptionHandler {
             sbErrorMessage.append(formatFieldError(fieldError));
             sbErrorMessage.append("\n");
         }
-        return createExceptionResponse(BIND_EXCEPTION_CODE,sbErrorMessage.toString(),ex);
+        return createExceptionResponse(CODE_BIND_EXCEPTION,"BIND_EXCEPTION", sbErrorMessage.toString(),ex);
     }
     private String formatFieldError(FieldError e){
         return String.format(" Input field: [%s] error, reason: [%s]", e.getField(), e.getDefaultMessage());
@@ -47,18 +47,18 @@ public class BaseExceptionHandler {
     @ExceptionHandler(value = org.springframework.web.bind.MethodArgumentNotValidException.class)
     public RestResponse methodArgumentNotValidExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException ex) {
         FieldError fieldError = ex.getBindingResult().getFieldError();
-        return createExceptionResponse(METHOD_EXCEPTION_CODE, formatFieldError(fieldError),ex);
+        return createExceptionResponse(CODE_METHOD_EXCEPTION,"METHOD_EXCEPTION", formatFieldError(fieldError),ex);
     }
 
     @ResponseBody
     @ExceptionHandler(value = ServiceException.class)
     public RestResponse serviceExceptionHandler(HttpServletRequest HttpServletRequest, ServiceException ex) {
-        return this.createExceptionResponse(ex.getCode(), ex.message, ex);
+        return this.createExceptionResponse(ex.getCode(), ex.message, ex.detail, ex);
     }
 
-    private RestResponse createExceptionResponse(int code, String message, Exception ex){
+    private RestResponse createExceptionResponse(int code, String message,  String detail, Exception ex){
         logger.error("Exception handler: " + ex.getMessage(), ex);
-        return RestResponse.fail(code,message);
+        return RestResponse.fail(code,message, detail);
     }
 
 }
