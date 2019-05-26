@@ -49,7 +49,9 @@ public class RestResponse {
 
         HashMap<String, Object> data = new HashMap<String, Object>();
         data.put("message", message);
-        data.put("detail", detail);
+        if(detail != null && detail.length() > 0){
+            data.put("detail", detail);
+        }
         return new RestResponse(code, data);
     }
 
