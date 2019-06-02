@@ -2,12 +2,12 @@ package com.github.commonweb.page;
 
 import java.util.List;
 
-public class PageInfo<T> {
-    Integer count;
+public class PageResult<T> {
+    long count;
     List<T> rows;
 
-    public static <T> PageInfo<T> make(Integer count, List<T> rows) {
-        PageInfo page = new PageInfo<T>();
+    public static <T> PageResult<T> make(long count, List<T> rows) {
+        PageResult page = new PageResult<T>();
         page.setCount(count);
         page.setRows(rows);
         return page;
@@ -21,11 +21,11 @@ public class PageInfo<T> {
                 '}';
     }
 
-    public Integer getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
