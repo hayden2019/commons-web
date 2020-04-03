@@ -1,11 +1,8 @@
 package com.github.commonweb;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-
-123
 
 public class RestResponse {
 
